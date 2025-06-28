@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Register</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/auth.css">
+</head>
+<body>
+  <!-- Header Fragment -->
+  <div th:replace="fragments/header :: header"></div>
+
+  <div class="container">
+    <form th:action="@{/register}" th:object="${user}" method="post" class="auth-form" onsubmit="return validateForm()">
+      <h2>Register</h2>
+
+      <!-- Messages Fragment (Ensure fragments/messages.html exists with th:fragment="message") -->
+      <div th:replace="fragments/messages :: message"></div>
+
+      <input type="text" th:field="*{name}" placeholder="Full Name" required />
+      <input type="email" th:field="*{email}" placeholder="Email" id="email" required />
+      <input type="password" th:field="*{password}" placeholder="Password" id="password" required />
+
+      <button type="submit">Register</button>
+	  <a href="/login" class="login-button">Already have an account? Log In</a>
+    </form>
+  </div>
+
+  <!-- Footer Fragment -->
+  <div th:replace="fragments/footer :: footer"></div>
+
+  <script src="/js/form-validation.js"></script>
+</body>
+</html>

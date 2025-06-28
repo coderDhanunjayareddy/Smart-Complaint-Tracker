@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>New Complaint</title>
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+  <div th:replace="fragments/header :: header"></div>
+
+  <div class="container">
+    <form th:action="@{/complaint/save}" th:object="${complaint}" method="post" class="auth-form">
+      <h2>Submit a Complaint</h2>
+
+      <input type="text" th:field="*{title}" placeholder="Complaint Title" required />
+      <textarea th:field="*{description}" placeholder="Describe the issue..." rows="5" required></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

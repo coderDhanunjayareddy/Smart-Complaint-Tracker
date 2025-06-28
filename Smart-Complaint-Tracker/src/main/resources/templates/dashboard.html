@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+  <div th:replace="fragments/header :: header"></div>
+	
+  <div class="container">
+	<div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem;">
+	  <h2>All Complaints</h2>
+	  <a href="/complaint/new" class="register-button">Register Complaint</a>
+	</div>
+    <div th:each="complaint : ${complaints}" style="background: #fff; padding: 1rem; margin-bottom: 1rem; border-radius: 10px;">
+      <h4 th:text="${complaint.title}">Complaint Title</h4>
+      <p th:text="${complaint.description}">Complaint Description</p>
+      <small th:text="'By: ' + ${complaint.user.name}">User Name</small>
+      <div style="margin-top: 0.5rem;">
+        <!-- FIX: Use double square brackets inside JavaScript expression -->
+		<button th:onclick="'upvote(' + ${complaint.id} + ')'">Upvote 👍</button>
+		<span th:id="'vote-' + ${complaint.id}" th:text="${complaint.upvotes}">0</span>
+      </div>
+    </div>
+  </div>
+
+  <div th:replace="fragments/footer :: footer"></div>
+  <script src="/js/main.js"></script>
+</body>
+</html>
